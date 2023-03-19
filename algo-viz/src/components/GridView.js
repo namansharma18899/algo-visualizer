@@ -2,9 +2,9 @@ import React from 'react';
 import './grid.css';
 import { useState } from 'react';
 
+
+
 function Grid() {
-  const matrix = useState([[]])
-  const cells = useState(100)// we'll keep it multiple of 10
   const [graph, setGraph]= useState({
     'waypoints':{
       'start':null,
