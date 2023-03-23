@@ -1056,4 +1056,3 @@ let source = 0;
 let dest = 7;
 printShortestDistance(adj, source, dest, v);
 
-// The code is contributed by Gautam goel
