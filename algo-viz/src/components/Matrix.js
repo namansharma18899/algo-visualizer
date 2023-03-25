@@ -41,7 +41,7 @@ function MatrixToGrid() {
             tempColors[keys] = '#2E3440'
         }
         setGraph(tempGraph)
-        console.log('im heree')
+        console.log('im heree', tempGraph)
         setCellColors(tempColors)
     },[])
 
