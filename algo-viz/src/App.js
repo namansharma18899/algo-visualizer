@@ -1,6 +1,6 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 // import './App.css';
-import Grid from './components/GridView';
+// import Grid from './components/GridView';
 import MatrixToGrid from './components/Matrix';
 import Sidebar from './components/navigation/sidebar' ;
 import { BrowserRouter as Router } from 'react-router-dom';
