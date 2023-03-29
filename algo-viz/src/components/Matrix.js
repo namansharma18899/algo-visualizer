@@ -49,8 +49,8 @@ function MatrixToGrid() {
         'curr': 'start'
     })
     const cellStyle = {
-        width: '40px',
-        height: '40px',
+        width: '60px',
+        height: '60px',
         border: '1px solid black',
         boxSizing: 'border-box',
     };
@@ -59,8 +59,9 @@ function MatrixToGrid() {
         display: 'grid',
         placeContent: 'center',
         height: '100vh',
-        gridTemplateColumns: 'repeat(10, 40px)',
-        gridTemplateRows: 'repeat(10, 40px)',
+        width:'100%',
+        gridTemplateColumns: 'repeat(10, 60px)',
+        gridTemplateRows: 'repeat(10, 60px)',
         gap: '1px',
         border: '1px solid black',
         backgroundColor: 'black'
@@ -94,6 +95,7 @@ function MatrixToGrid() {
     }
 
     function visualizePath(event) {
+        // TODO: visluze path
         console.log(cellColors)
         console.log(graph)
         // var tempWaypoints = { ...waypoints }
@@ -105,8 +107,11 @@ function MatrixToGrid() {
     }
 
     return (
-        <div>
-            <button onClick={(event) => visualizePath(event)}> click me</button>
+        <div style={{display:'flex',flexWrap:'wrap',width:'100%',height:'100%', backgroundColor:'red'}}>
+            <div>
+                {/* TODO: fix flexblox padding, button overflowing the page */}
+                <button style={{backgroundColor:'lightblue'}} onClick={(event) => visualizePath(event)}> click me</button>
+            </div>
             <div style={gridStyle}>
                 {matrix.map((row, rowIndex) =>
                     row.map((cell, colIndex) => (
@@ -114,10 +119,10 @@ function MatrixToGrid() {
                             onClick={() => handleCellClick([rowIndex, colIndex])}
                             key={`${rowIndex}-${colIndex}`}
                             style={{
-                                background: GetCellColor(rowIndex,colIndex),//'#2E3440'
+                                background: GetCellColor(rowIndex,colIndex),//'#2E3460'
                                 color: '#D8DEE9',
-                                height: '40px',
-                                width: '40px',
+                                height: '60px',
+                                width: '60px',
                                 // fontSize: '24px',
                                 fontWeight: 'bold',
                                 border: '1px solid black',
