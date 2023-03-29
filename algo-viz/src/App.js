@@ -9,9 +9,11 @@ function App() {
   return (
     <div>
       <Router>
-        <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}>
+        <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial'}}>
           <Sidebar/>
           <MatrixToGrid/>
+          {/* <div style={{width:'100%',flexDirection:'column'}}> */}
+          {/* </div> */}
         </div>
       </Router>
     </div>
