@@ -38,14 +38,14 @@ function Grid() {
 
   const handleCellClick = (index) => {
     const newCellColors = [...cellColors];
-    let newColor = flag['curr']=='start'? 'green' : 'red';
+    let newColor = flag['curr']==='start'? 'green' : 'red';
     let tempGraph = graph;
     newCellColors[index] = newColor;
     const newFlag = {};
     tempGraph['waypoints'][flag['curr']] = index
     console.log(tempGraph, flag)
     setGraph(tempGraph)
-    newFlag['curr'] = (flag['curr']=='start') ? 'end' : 'start';
+    newFlag['curr'] = (flag['curr']==='start') ? 'end' : 'start';
     setCellColors(newCellColors);
     setFlag(newFlag)
   };

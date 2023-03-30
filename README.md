@@ -1,12 +1,17 @@
 # algo-visualizer
+
 ## Table on Contents
-* [Setup](#setup)
-* [Important](#important)
+
+- [Setup](#setup)
+- [Important](#important)
+
 ## Setup
-* Insatll Node and React on your system.
-* Install the dependencies & run the app.
+
+- Insatll Node and React on your system.
+- Install the dependencies & run the app.
+
 ```
-$ cd algo-visualizer
+$ cd algo-viz
 $ npm install
-$ npx start
+$ npm start
 ```
