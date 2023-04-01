@@ -30,15 +30,71 @@ function MatrixToGrid() {
   });
   const [cellColors, setCellColors] = useState({});
   const [graph, setGraph] = useState(null);
+  const [foundFlag, setFoundFlag] = useState(false);
+  const [visited, setVisited] = useState(null);
+  const [stack, setStack] = useState([]);
+
+  function TimeOut(delay) {
+    return new Promise( res => setTimeout(res, delay) );
+  }
+
+  function FillCurrElement(index){
+    const newCellColors = { ...cellColors };
+    newCellColors[index] = 'blue';
+    setCellColors(newCellColors);
+  }
+
+  function CheckValidGridIndex(sourcex,sourcey){
+    if(sourcex<0 || sourcex>9 || sourcey<0 || sourcey>9){
+      return false;
+    }
+    return true;
+  }
+
+
+  function VisualizePath(sourcex,sourcey,destinationx,destinationy) {
+    if (CheckValidGridIndex(sourcex,sourcey) && visited[sourcex][sourcey]=="false"){
+      console.log('in visua path')
+      if(foundFlag==true || (sourcex<0 || sourcex>9 || sourcey<0 || sourcey>9)){
+        return false
+      }
+      if (sourcex==destinationx && sourcey==destinationy){
+        setFoundFlag(true)
+        alert('Found Flag Hurrah')
+        return true
+      }
+      var temp= [...visited]
+      temp[sourcex][sourcey]="true"
+      setVisited(temp)
+      // FillCurrElement([sourcex,sourcey])
+      VisualizePath( sourcex+1,sourcey,destinationx,destinationy)
+      // await TimeOut(1000); //for 1 sec delay
+      VisualizePath( sourcex-1,sourcey,destinationx,destinationy)
+      // await TimeOut(1000); //for 1 sec delay
+      VisualizePath( sourcex,sourcey+1,destinationx,destinationy)
+      // await TimeOut(1000); //for 1 sec delay
+      VisualizePath( sourcex,sourcey-1,destinationx,destinationy)
+    }
+  }
 
   useEffect(() => {
     const tempGraph = createGraph();
     var tempColors = {};
+    var visited = new Array(10);
+    for (var i=0; i<10;i++){
+      visited[i]=new Array(10);
+    }
     for (const keys in tempGraph) {
       tempColors[keys] = "#2E3440";
+
     }
+    for(var index=0; index<10;index++){
+      for(var j=0;j<10;j++){
+        visited[index][j]='false'
+      }
+    }
+    setVisited(visited);
     setGraph(tempGraph);
-    console.log("im heree", tempGraph);
     setCellColors(tempColors);
   }, []);
 
@@ -72,13 +128,9 @@ function MatrixToGrid() {
     newCellColors[index] = newColor;
     const newFlag = {};
     tempWaypoints[flag["curr"]] = index;
-    console.log(tempWaypoints, flag);
     setWaypoints(tempWaypoints);
     newFlag["curr"] = flag["curr"] === "start" ? "end" : "start";
     setCellColors(newCellColors);
-    console.log("scls -> ");
-    console.log(cellColors);
-    console.log(newCellColors);
     setFlag(newFlag);
   };
 
@@ -93,8 +145,10 @@ function MatrixToGrid() {
   }
     function visualizePath() {
         // TODO: visluze path
+        console.log(waypoints)
+        console.log(visited)
         console.log(cellColors)
-        console.log(graph)
+        VisualizePath(waypoints['start'][0],waypoints['start'][1],waypoints['end'][0],waypoints['end'][1])
         // var tempWaypoints = { ...waypoints }
         // if (tempWaypoints['start'] == null || tempWaypoints['end'] == null) {
         //     alert('Set both start and End')
