@@ -5,7 +5,14 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-function NavScrollExample() {
+function NavScrollExample(props) {
+  
+  function printProps(){
+    const visualizePath = props.props
+    visualizePath()
+  }
+
+
   return (
     <Navbar bg="dark" variant='dark' expand="lg">
       <Container fluid>
@@ -19,19 +26,10 @@ function NavScrollExample() {
           >
             <Nav.Link href="#action1">Add Start</Nav.Link>
             <Nav.Link href="#action1">Add End</Nav.Link>
-            <Nav.Link href="#action1" disabled>
-              Add Blockers
+            <Nav.Link onClick={()=> printProps()} >
+              SearchPath
             </Nav.Link>
           </Nav>
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form>
         </Navbar.Collapse>
       </Container>
     </Navbar>

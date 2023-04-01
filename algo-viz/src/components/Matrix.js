@@ -65,40 +65,6 @@ function MatrixToGrid() {
         backgroundColor: 'black'
     };
 
-    /* On screens that are 992px or less */
-    "@media screen and (max-width: 720px)": {
-      display: "none",
-      placeContent: "center",
-      height: "40vh",
-      width: "70%",
-      gridTemplateColumns: "repeat(10, 40px)",
-      gridTemplateRows: "repeat(10, 40px)",
-      gap: "1px",
-      alignItems: "center",
-      textAlign: "center",
-      justifySelf: "baseline",
-      border: "1px solid black",
-      backgroundColor: "black",
-    },
-
-    /* On screens that are 600px or less */
-    "@media screen and (max-width: 480px)": {
-      display: "grid",
-      placeContent: "center",
-      height: "40vh",
-      width: "20%",
-      maxWidth: "20px",
-      gridTemplateColumns: "repeat(10, 10px)",
-      gridTemplateRows: "repeat(10, 30px)",
-      gap: "1px",
-      alignItems: "center",
-      textAlign: "center",
-      justifySelf: "baseline",
-      border: "1px solid black",
-      backgroundColor: "black",
-    },
-  };
-
   const handleCellClick = (index) => {
     const newCellColors = { ...cellColors };
     let newColor = flag["curr"] === "start" ? "green" : "red";
@@ -125,11 +91,22 @@ function MatrixToGrid() {
       return res;
     }
   }
+    function visualizePath() {
+        // TODO: visluze path
+        console.log(cellColors)
+        console.log(graph)
+        // var tempWaypoints = { ...waypoints }
+        // if (tempWaypoints['start'] == null || tempWaypoints['end'] == null) {
+        //     alert('Set both start and End')
+        // }
+        // var temp = "".concat(tempWaypoints['start']).concat(tempWaypoints['end'])
+        // alert(temp)
+    }
 
 
     return (
             <Container fluid>
-                <NavScrollExample/>
+                <NavScrollExample props={visualizePath}/>
                 <div style={{display:'flex',width:'100%',height:'95.5%', backgroundColor:'grey'}}>
                     <div style={gridStyle}> 
                             {matrix.map((row, rowIndex) =>
