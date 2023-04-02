@@ -28,7 +28,18 @@ function MatrixToGrid() {
     start: null,
     end: null,
   });
-  const [cellColors, setCellColors] = useState({});
+  const [cellColors, setCellColors] = useState(()=>{
+    var temp = new Array(10);
+    for (var i=0; i<10;i++){
+      temp[i]=new Array(10);
+    }
+    for(var index=0; index<10;index++){
+      for(var j=0;j<10;j++){
+        temp[index][j]='white'
+      }
+    }
+    return temp;
+  });
   const [graph, setGraph] = useState(null);
   const [foundFlag, setFoundFlag] = useState(false);
   const [visited, setVisited] = useState(null);
@@ -40,7 +51,7 @@ function MatrixToGrid() {
 
   function FillCurrElement(index){
     const newCellColors = { ...cellColors };
-    newCellColors[index] = 'blue';
+    newCellColors[index[0]][index[1]] = 'blue';
     setCellColors(newCellColors);
   }
 
@@ -66,14 +77,13 @@ function MatrixToGrid() {
       var temp= [...visited]
       temp[sourcex][sourcey]="true"
       setVisited(temp)
-      // FillCurrElement([sourcex,sourcey])
-      VisualizePath( sourcex+1,sourcey,destinationx,destinationy)
-      // await TimeOut(1000); //for 1 sec delay
-      VisualizePath( sourcex-1,sourcey,destinationx,destinationy)
-      // await TimeOut(1000); //for 1 sec delay
-      VisualizePath( sourcex,sourcey+1,destinationx,destinationy)
-      // await TimeOut(1000); //for 1 sec delay
-      VisualizePath( sourcex,sourcey-1,destinationx,destinationy)
+      setTimeout(() => {
+        FillCurrElement([sourcex,sourcey])
+        VisualizePath(sourcex+1,sourcey,destinationx,destinationy)
+        VisualizePath(sourcex-1,sourcey,destinationx,destinationy)
+        VisualizePath(sourcex,sourcey+1,destinationx,destinationy)
+        VisualizePath(sourcex,sourcey-1,destinationx,destinationy)
+      }, 1000);
     }
   }
 
@@ -95,7 +105,7 @@ function MatrixToGrid() {
     }
     setVisited(visited);
     setGraph(tempGraph);
-    setCellColors(tempColors);
+    // setCellColors(tempColors);
   }, []);
 
 
@@ -125,7 +135,9 @@ function MatrixToGrid() {
     const newCellColors = { ...cellColors };
     let newColor = flag["curr"] === "start" ? "green" : "red";
     let tempWaypoints = waypoints;
-    newCellColors[index] = newColor;
+    console.log('index -> '+index)
+    console.log(newCellColors[index[0]][index[1]])
+    newCellColors[index[0]][index[1]] = newColor;
     const newFlag = {};
     tempWaypoints[flag["curr"]] = index;
     setWaypoints(tempWaypoints);
@@ -149,12 +161,6 @@ function MatrixToGrid() {
         console.log(visited)
         console.log(cellColors)
         VisualizePath(waypoints['start'][0],waypoints['start'][1],waypoints['end'][0],waypoints['end'][1])
-        // var tempWaypoints = { ...waypoints }
-        // if (tempWaypoints['start'] == null || tempWaypoints['end'] == null) {
-        //     alert('Set both start and End')
-        // }
-        // var temp = "".concat(tempWaypoints['start']).concat(tempWaypoints['end'])
-        // alert(temp)
     }
 
 
@@ -169,7 +175,7 @@ function MatrixToGrid() {
                                     onClick={() => handleCellClick([rowIndex, colIndex])}
                                     key={`${rowIndex}-${colIndex}`}
                                     style={{
-                                        background: GetCellColor(rowIndex,colIndex),//'#2E3460'
+                                        background: cellColors[rowIndex][colIndex],//'#2E3460'
                                         color: '#D8DEE9',
                                         height: '40px',
                                         width: '40px',
