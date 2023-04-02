@@ -49,9 +49,9 @@ function MatrixToGrid() {
     return new Promise( res => setTimeout(res, delay) );
   }
 
-  function FillCurrElement(index){
+  function FillCurrElement(index,color){
     const newCellColors = { ...cellColors };
-    newCellColors[index[0]][index[1]] = 'blue';
+    newCellColors[index[0]][index[1]] = color;
     setCellColors(newCellColors);
   }
 
@@ -70,7 +70,10 @@ function MatrixToGrid() {
         return false
       }
       if (sourcex==destinationx && sourcey==destinationy){
-        setFoundFlag(true)
+        FillCurrElement([sourcex,sourcey],'gold')
+        setFoundFlag(()=>{
+          return true
+        })
         alert('Found Flag Hurrah')
         return true
       }
@@ -78,7 +81,7 @@ function MatrixToGrid() {
       temp[sourcex][sourcey]="true"
       setVisited(temp)
       setTimeout(() => {
-        FillCurrElement([sourcex,sourcey])
+        FillCurrElement([sourcex,sourcey],'blue')
         VisualizePath(sourcex+1,sourcey,destinationx,destinationy)
         VisualizePath(sourcex-1,sourcey,destinationx,destinationy)
         VisualizePath(sourcex,sourcey+1,destinationx,destinationy)
