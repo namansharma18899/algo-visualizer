@@ -62,25 +62,36 @@ function MatrixToGrid() {
     return true;
   }
 
+  function SetF(val){
+      setFoundFlag(val)
+  }
 
-  function VisualizePath(sourcex,sourcey,destinationx,destinationy) {
+  useEffect(()=>{
+    if(foundFlag==true){
+      alert('Foud Element')
+    }
+  },[foundFlag])
+
+    function VisualizePath(sourcex,sourcey,destinationx,destinationy) {
     if (CheckValidGridIndex(sourcex,sourcey) && visited[sourcex][sourcey]=="false"){
-      console.log('in visua path')
       if(foundFlag==true || (sourcex<0 || sourcex>9 || sourcey<0 || sourcey>9)){
         return false
-      }
+      }// Can't figure this out on my own.....Need some experto Advice : >
       if (sourcex==destinationx && sourcey==destinationy){
+        console.log('Waiting for setFoundFlag', foundFlag)
+        SetF(true)
+        console.log('setFoundFlag -> '+ foundFlag)
         FillCurrElement([sourcex,sourcey],'gold')
-        setFoundFlag(()=>{
-          return true
-        })
-        alert('Found Flag Hurrah')
         return true
       }
       var temp= [...visited]
       temp[sourcex][sourcey]="true"
       setVisited(temp)
       setTimeout(() => {
+        if(foundFlag==true){
+          return null;
+        }
+        //TODO: NEED TO PUT THESE FUNCTIONS AS PART OF CALLBACK IN setStateVar
         FillCurrElement([sourcex,sourcey],'blue')
         VisualizePath(sourcex+1,sourcey,destinationx,destinationy)
         VisualizePath(sourcex-1,sourcey,destinationx,destinationy)
@@ -108,7 +119,6 @@ function MatrixToGrid() {
     }
     setVisited(visited);
     setGraph(tempGraph);
-    // setCellColors(tempColors);
   }, []);
 
 
