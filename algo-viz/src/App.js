@@ -13,8 +13,8 @@ function App() {
       <Router>
         <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial'}}>
           <Sidebar/>
-            {/* <MatrixToGrid/> */}
-          <Shuffle/>
+            <MatrixToGrid/>
+          {/* <Shuffle/> */}
         </div>
       </Router>
     </div>
