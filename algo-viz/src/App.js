@@ -1,9 +1,11 @@
 // import logo from './logo.svg';
 // import './App.css';
 // import Grid from './components/GridView';
-import MatrixToGrid from './components/Matrix';
+import MatrixToGrid from './components/algo/Dijkstra/Dijkstra';
 import Sidebar from './components/navigation/sidebar' ;
 import { BrowserRouter as Router } from 'react-router-dom';
+import Shuffle from './components/algo/DurstenfeldShuffle/Shuffle';
+
 
 function App() {
   return (
@@ -11,9 +13,8 @@ function App() {
       <Router>
         <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial'}}>
           <Sidebar/>
-          <MatrixToGrid/>
-          {/* <div style={{width:'100%',flexDirection:'column'}}> */}
-          {/* </div> */}
+            {/* <MatrixToGrid/> */}
+          <Shuffle/>
         </div>
       </Router>
     </div>

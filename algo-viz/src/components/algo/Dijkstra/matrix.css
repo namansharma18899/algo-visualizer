@@ -1,0 +1,28 @@
+.grid-container {
+    display: 'grid';
+    place-content: 'center';
+    height: '100vh';
+    grid-template-columns: 'repeat(10; 40px)';
+    grid-template-rows: 'repeat(10; 40px)';
+    gap: '1px';
+    width:auto;
+    border: '1px solid black';
+    background-color: 'black'
+  }
+/*   
+  .grid-row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    gap: 1px;
+  } */
+  
+  .grid-col {
+    background-color: aquamarine;
+    /* flex-basis: 10%; */
+    height: 60px;
+    width: 60px;
+    border: 1px solid black;
+    box-sizing: border-box;
+  }
+  

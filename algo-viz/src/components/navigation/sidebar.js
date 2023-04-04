@@ -1,4 +1,6 @@
 import React from "react";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 import {
   CDBSidebar,
   CDBSidebarContent,
@@ -8,6 +10,10 @@ import {
   CDBSidebarMenuItem,
 } from "cdbreact";
 import { NavLink } from "react-router-dom";
+import { Nav, NavDropdown } from 'react-bootstrap';
+import { FaHome, FaShoppingBag, FaBars, FaUser } from 'react-icons/fa';
+
+const algoList = ['Dijkstra', 'DurstenfeldShuffle']
 
 const Sidebar = () => {
   return (
@@ -27,30 +33,27 @@ const Sidebar = () => {
             <NavLink exact to="/" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
-            {/* <NavLink exact to="/tables" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Tables</CDBSidebarMenuItem>
-            </NavLink> */}
-            {/* <NavLink exact to="/profile" activeClassName="activeClicked"> */}
               <CDBSidebarMenuItem icon="user">
                 <a href="https://www.linkedin.com/in/naman-sharma-a10722192/">Profile page</a>
               </CDBSidebarMenuItem>
-            {/* </NavLink> */}
-            {/* <NavLink activeClassName="activeClicked"> */}
               <CDBSidebarMenuItem icon="chart-line">
                 <a href="https://www.algorithm-archive.org/">Documentation</a>
               </CDBSidebarMenuItem>
-            {/* </NavLink> */}
-
-            {/* <NavLink
-              exact
-              to="/hero404"
-              target="_blank"
-              activeClassName="activeClicked"
-            > */}
               <CDBSidebarMenuItem icon="exclamation-circle">
                 <a href="https://github.com/namansharma18899">About the Author</a>
               </CDBSidebarMenuItem>
-            {/* </NavLink> */}
+              {/* TODO: fix the dropdown  */}
+              <Dropdown style={{marginLeft:"30px"}}>
+                <Dropdown.Toggle id="dropdown-button-dark-example1" variant="dark">
+                  Dropdown Button
+                </Dropdown.Toggle>
+                <Dropdown.Menu style={{backgroundColor:"grey"}} variant="dark">
+                {algoList.map((val,index) =>(
+                  <Dropdown.Item variant="dark" href={"/"+val}>{val}</Dropdown.Item>
+                )
+                )}
+                </Dropdown.Menu>
+              </Dropdown>
           </CDBSidebarMenu>
         </CDBSidebarContent>
 
@@ -67,5 +70,4 @@ const Sidebar = () => {
     </div>
   );
 };
-
 export default Sidebar;

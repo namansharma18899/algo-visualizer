@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "cdbreact": "^1.5.10",
     "react": "^18.2.0",
+    "react-bootstrap": "^1.6.6",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",
