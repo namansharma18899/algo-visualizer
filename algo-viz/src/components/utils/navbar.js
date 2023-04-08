@@ -8,7 +8,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 function NavScrollExample(props) {
   
   function printProps(){
-    const visualizePath = props.props
+    const visualizePath = props.visualizePath
     visualizePath()
   }
 
@@ -25,7 +25,7 @@ function NavScrollExample(props) {
             navbarScroll
           >
             <Nav.Link href="#action1">Add Start</Nav.Link>
-            <Nav.Link href="#action1">Add End</Nav.Link>
+            <Nav.Link onClick={()=> props.AddBlockers()}>Add End</Nav.Link>
             <Nav.Link onClick={()=> printProps()} >
               SearchPath
             </Nav.Link>

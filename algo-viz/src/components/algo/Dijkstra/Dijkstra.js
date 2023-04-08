@@ -20,6 +20,8 @@ const matrix = [
 ];
 
 function MatrixToGrid() {
+  const [addblock, setAddblock] = useState(false)
+  const [blockers, setBlockers] = useState([])
   const [waypoints, setWaypoints] = useState({
     start: null,
     end: null,
@@ -70,9 +72,9 @@ function MatrixToGrid() {
 
     function VisualizePath(sourcex,sourcey,destinationx,destinationy) {
     if (CheckValidGridIndex(sourcex,sourcey) && visited[sourcex][sourcey]=="false"){
-      if(foundFlag==true || (sourcex<0 || sourcex>9 || sourcey<0 || sourcey>9)){
+      if(foundFlag==true || (sourcex<0 || sourcex>9 || sourcey<0 || sourcey>9) || ((blockers.find(el => el[0]==sourcex && el[1]==sourcey)!=undefined ? true : false) == true)){
         return false
-      }// Can't figure this out on my own.....Need some experto Advice : >
+      }// Can't figure this out on my own.....Need some rect recursion export
       if (sourcex==destinationx && sourcey==destinationy){
         console.log('Waiting for setFoundFlag', foundFlag)
         SetF(true)
@@ -142,18 +144,30 @@ function MatrixToGrid() {
 
   const handleCellClick = (index) => {
     const newCellColors = { ...cellColors };
-    let newColor = flag["curr"] === "start" ? "green" : "red";
+    const newFlag = {};
+    let newColor= null;
+    if (addblock==false){
+    newColor = flag["curr"] === "start" ? "green" : "red";
+    newFlag["curr"] = flag["curr"] === "start" ? "end" : "start";
+    setFlag(newFlag);
     let tempWaypoints = waypoints;
+    tempWaypoints[flag["curr"]] = index;
+    setWaypoints(tempWaypoints);
+  }else{
+    newColor = 'brown';
+    const updatedBlockers = [...blockers]
+    updatedBlockers.push(index)
+    setBlockers(updatedBlockers)
+  }
     console.log('index -> '+index)
     console.log(newCellColors[index[0]][index[1]])
     newCellColors[index[0]][index[1]] = newColor;
-    const newFlag = {};
-    tempWaypoints[flag["curr"]] = index;
-    setWaypoints(tempWaypoints);
-    newFlag["curr"] = flag["curr"] === "start" ? "end" : "start";
     setCellColors(newCellColors);
-    setFlag(newFlag);
   };
+
+  function AddBlockers(){
+    setAddblock(((addblock==true) ? false : true));
+  }
 
   function GetCellColor(row, col) {
     var val = "".concat(row).concat(",").concat(col);
@@ -169,13 +183,14 @@ function MatrixToGrid() {
         console.log(waypoints)
         console.log(visited)
         console.log(cellColors)
+        console.log(blockers)
         VisualizePath(waypoints['start'][0],waypoints['start'][1],waypoints['end'][0],waypoints['end'][1])
     }
 
 
     return (
             <Container fluid>
-                <NavScrollExample props={visualizePath}/>
+                <NavScrollExample visualizePath={visualizePath} AddBlockers={AddBlockers}/>
                 <div style={{display:'flex',width:'100%',height:'95.5%', backgroundColor:'grey'}}>
                     <div style={gridStyle}> 
                             {matrix.map((row, rowIndex) =>
