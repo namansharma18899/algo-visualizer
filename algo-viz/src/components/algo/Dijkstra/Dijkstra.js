@@ -4,22 +4,15 @@ import { useState, useEffect } from 'react';
 import NavScrollExample from '../../utils/navbar';
 import Container from 'react-bootstrap/Container';
 import './matrix.css';
+import styled from 'styled-components';
+import { Col } from 'react-bootstrap';
 
 
-const matrix = [
-  [0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
-  [1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-  [0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
-  [1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-  [0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
-  [1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-  [0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
-  [1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-  [0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
-  [1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-];
+const Rows = 10;
+const Cols = 80;
 
 function MatrixToGrid() {
+  
   const [addblock, setAddblock] = useState(false)
   const [blockers, setBlockers] = useState([])
   const [waypoints, setWaypoints] = useState({
@@ -27,14 +20,9 @@ function MatrixToGrid() {
     end: null,
   });
   const [cellColors, setCellColors] = useState(()=>{
-    var temp = new Array(10);
-    for (var i=0; i<10;i++){
-      temp[i]=new Array(10);
-    }
-    for(var index=0; index<10;index++){
-      for(var j=0;j<10;j++){
-        temp[index][j]='white'
-      }
+    var temp = new Array(Rows);
+    for (var i=0; i<Rows;i++){
+      temp[i]=new Array(Cols).fill('white');
     }
     return temp;
   });
@@ -54,7 +42,7 @@ function MatrixToGrid() {
   }
 
   function CheckValidGridIndex(sourcex,sourcey){
-    if(sourcex<0 || sourcex>9 || sourcey<0 || sourcey>9){
+    if(sourcex<0 || sourcex>(Rows-1) || sourcey<0 || sourcey>(Cols-1)){
       return false;
     }
     return true;
@@ -72,7 +60,7 @@ function MatrixToGrid() {
 
     function VisualizePath(sourcex,sourcey,destinationx,destinationy) {
     if (CheckValidGridIndex(sourcex,sourcey) && visited[sourcex][sourcey]=="false"){
-      if(foundFlag==true || (sourcex<0 || sourcex>9 || sourcey<0 || sourcey>9) || ((blockers.find(el => el[0]==sourcex && el[1]==sourcey)!=undefined ? true : false) == true)){
+      if(foundFlag==true || (sourcex<0 || sourcex>(Rows-1) || sourcey<0 || sourcey>(Cols-1)) || ((blockers.find(el => el[0]==sourcex && el[1]==sourcey)!=undefined ? true : false) == true)){
         return false
       }// Can't figure this out on my own.....Need some rect recursion export
       if (sourcex==destinationx && sourcey==destinationy){
@@ -95,48 +83,43 @@ function MatrixToGrid() {
         VisualizePath(sourcex-1,sourcey,destinationx,destinationy)
         VisualizePath(sourcex,sourcey+1,destinationx,destinationy)
         VisualizePath(sourcex,sourcey-1,destinationx,destinationy)
-      }, 1000);
+      }, 200);
     }
   }
 
   useEffect(() => {
-    const tempGraph = createGraph();
+    // const tempGraph = createGraph();
     var tempColors = {};
-    var visited = new Array(10);
-    for (var i=0; i<10;i++){
-      visited[i]=new Array(10);
+    var visited = new Array(Rows);
+    for (var i=0; i<Rows;i++){
+      visited[i]=new Array(Cols).fill('false');
     }
-    for (const keys in tempGraph) {
-      tempColors[keys] = "#2E3440";
+    // for (const keys in tempGraph) {
+    //   tempColors[keys] = "#2E3440";
 
-    }
-    for(var index=0; index<10;index++){
-      for(var j=0;j<10;j++){
-        visited[index][j]='false'
-      }
-    }
+    // }
     setVisited(visited);
-    setGraph(tempGraph);
+    // setGraph(tempGraph);
   }, []);
 
 
     const [flag, setFlag] = useState({
         'curr': 'start'
     })
-    const cellStyle = {
-        width: '40px',
-        height: '40px',
-        border: '1px solid black',
-        boxSizing: 'border-box',
-    };
+    // const cellStyle = {
+    //     width: '50px',
+    //     height: '50px',
+    //     border: '1px solid black',
+    //     boxSizing: 'border-box',
+    // };
 
     const gridStyle = {
         display: 'grid',
         placeContent: 'center',
         height: '99.9%',
         width:'100%',
-        gridTemplateColumns: 'repeat(10, 40px)',
-        gridTemplateRows: 'repeat(10, 40px)',
+        gridTemplateColumns: 'repeat($Cols, 20px)'.replace('$Cols',Cols),
+        gridTemplateRows: 'repeat($Rows, 10px)'.replace('$ Rows',Rows),
         gap: '1px',
         border: '1px solid black',
         backgroundColor: 'black'
@@ -187,33 +170,85 @@ function MatrixToGrid() {
         VisualizePath(waypoints['start'][0],waypoints['start'][1],waypoints['end'][0],waypoints['end'][1])
     }
 
+    function Game(){
+      var matrix = new Array(Rows);
+
+      for (var i=0; i<Rows;i++){
+        matrix[i]=new Array(Cols).fill(undefined);
+      }
+
+      return (
+        <div style={{display:'flex',width:'100%',height:'95.5%', backgroundColor:'grey'}}>
+            <div style={gridStyle}> 
+                    {matrix.map((row, rowIndex) =>
+                        row.map((cell, colIndex) => (
+                            <div
+                            onClick={() => handleCellClick([rowIndex, colIndex])}
+                            key={`${rowIndex}-${colIndex}`}
+                            style={{
+                                background: cellColors[rowIndex][colIndex],//'#2E3460'
+                                color: '#D8DEE9',
+                                height: '60px',
+                                // width: '60px',
+                                fontWeight: 'bold',
+                                border: '1px solid black',
+                                boxSizing: 'border-box',
+                            }}>                              
+                            </div>
+                        ))
+                        )}
+              </div> 
+          </div>
+      )
+    }
+
+    function AnotherGame(){
+      const AppWrapper = styled.div`
+        font-family: sans-serif;
+        text-align: center;
+        margin: 20px;
+      `;
+
+      const GridContainer = styled.div`
+        display: grid;
+        gap: 1px;
+        margin-top: 20px;
+        grid-template-columns: ${({ gridSize }) => `repeat(${gridSize}, 1fr)`};
+      `;
+
+      const GridCell = styled.div`
+        background-color: ${({ active }) => active ? '#333' : '#eee'};
+        border: 1px solid #ccc;
+        cursor: pointer;
+      `;
+      const [gridSize, setGridSize] = useState(Rows);
+      const [gridData, setGridData] = useState(new Array(gridSize * gridSize).fill(false));
+
+      const toggleCell = (index) => {
+        setGridData(gridData.map((value, i) => i === index ? !value : value));
+      }
+
+      return (
+        <AppWrapper>
+          <h1>Clickable Grids</h1>
+          <GridContainer gridSize={gridSize}>
+            {gridData.map((value, index) => (
+              <GridCell
+                key={index}
+                active={value}
+                onClick={() => toggleCell(index)}
+              />
+            ))}
+          </GridContainer>
+        </AppWrapper>
+      );
+    }
 
     return (
             <Container fluid>
                 <NavScrollExample visualizePath={visualizePath} AddBlockers={AddBlockers}/>
-                <div style={{display:'flex',width:'100%',height:'95.5%', backgroundColor:'grey'}}>
-                    <div style={gridStyle}> 
-                            {matrix.map((row, rowIndex) =>
-                                row.map((cell, colIndex) => (
-                                    <div
-                                    onClick={() => handleCellClick([rowIndex, colIndex])}
-                                    key={`${rowIndex}-${colIndex}`}
-                                    style={{
-                                        background: cellColors[rowIndex][colIndex],//'#2E3460'
-                                        color: '#D8DEE9',
-                                        height: '40px',
-                                        width: '40px',
-                                        fontWeight: 'bold',
-                                        border: '1px solid black',
-                                        boxSizing: 'border-box',
-                                    }}
-                                    >
-                                        {rowIndex}-{colIndex}
-                                    </div>
-                                ))
-                                )}
-                        </div> 
-                </div>
+                <Game/>
+                {/* // <AnotherGame/> */}
         </Container>
     );
 };
