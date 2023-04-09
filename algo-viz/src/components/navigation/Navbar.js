@@ -7,7 +7,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function MainNavbar() {
   return (
-    <Navbar bg="dark" variant='dark' expand="lg">
+    <Navbar bg="success" variant='dark' expand="lg">
       <Container fluid>
         <Navbar.Brand href="#">Algo Visualizer</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -16,7 +16,7 @@ function MainNavbar() {
             className="me-auto my-2 my-lg-0"
             style={{ maxHeight: '100px' }}
             navbarScroll
-          >you
+          >
             <NavDropdown title="Algorithms" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action1">Dijkstra Algo</NavDropdown.Item>
                 <NavDropdown.Item href="#action1">Durstenfield Shuffle</NavDropdown.Item>

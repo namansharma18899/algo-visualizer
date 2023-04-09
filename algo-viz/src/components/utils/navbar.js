@@ -6,12 +6,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function NavScrollExample(props) {
-  
-  function printProps(){
-    const visualizePath = props.visualizePath
-    visualizePath()
-  }
-
 
   return (
     <Navbar bg="dark" variant='dark' expand="lg">
@@ -24,11 +18,11 @@ function NavScrollExample(props) {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link href="#action1">Add Start</Nav.Link>
-            <Nav.Link onClick={()=> props.AddBlockers()}>Add End</Nav.Link>
-            <Nav.Link onClick={()=> printProps()} >
+            <Nav.Link onClick={()=> props.AddBlockers()}>Add Blockers</Nav.Link>
+            <Nav.Link onClick={()=> props.visualizePath()} >
               SearchPath
             </Nav.Link>
+            <Nav.Link onClick={()=>props.resetBoard()}>Reset</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
