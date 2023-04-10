@@ -5,6 +5,10 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
+function changeLoc(loc) {
+  window.location = loc
+}
+
 function MainNavbar() {
   return (
     <Navbar bg="success" variant='dark' expand="lg">
@@ -18,9 +22,9 @@ function MainNavbar() {
             navbarScroll
           >
             <NavDropdown title="Algorithms" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action1">Dijkstra Algo</NavDropdown.Item>
-                <NavDropdown.Item href="#action1">Durstenfield Shuffle</NavDropdown.Item>
-                <NavDropdown.Item href="#action1">A* Algo</NavDropdown.Item>
+                <NavDropdown.Item onClick={()=> changeLoc("/") }>Dijkstra Algo</NavDropdown.Item>
+                <NavDropdown.Item onClick={()=> changeLoc("/durstenfieldshuffle") }>Durstenfield Shuffle</NavDropdown.Item>
+                <NavDropdown.Item onClick={()=> changeLoc("/astar") }>A* Algo</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

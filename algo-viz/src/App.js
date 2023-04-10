@@ -8,22 +8,19 @@ import MainNavbar from './components/navigation/Navbar';
 import CollapsibleSidebar from './components/navigation/newSidebar';
 import FullscreenGrid from './components/utils/Grid';
 import ClickableGrids from './components/algo/Dijkstra/temp';
+import Shuffle from './components/algo/DurstenfeldShuffle/Shuffle';
 
 function App() {
   return (
     <div>
       <MainNavbar/>
-        <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial'}}>
-          {/* <Sidebar/> */}
-          {/* <ClickableGrids/> */}
-            <MatrixToGrid/>
-        </div>
-      {/* <Router>
+      <Router>
         <Routes>
-          <Route path="/" element={<FullscreenGrid/>}>
+          <Route path="/" element={<MatrixToGrid/>}/>
+          <Route path="/durstenfieldshuffle" element={<Shuffle/>}>
           </Route>
         </Routes>
-      </Router> */}
+      </Router>
     </div>
   );
 }

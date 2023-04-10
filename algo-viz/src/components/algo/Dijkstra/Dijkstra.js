@@ -173,7 +173,7 @@ function MatrixToGrid() {
     }
 
     return (
-      <div style={{ display: 'flex', width: '100%', height: '95.5%', backgroundColor: 'grey' }}>
+      <div style={{ display: 'flex', width: '100%', height: '100vh',overflow: 'scroll initial', backgroundColor: 'grey' }}>
         <div style={gridStyle}>
           {matrix.map((row, rowIndex) =>
             row.map((cell, colIndex) => (
