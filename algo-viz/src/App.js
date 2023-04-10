@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainNavbar from './components/navigation/Navbar';
 import CollapsibleSidebar from './components/navigation/newSidebar';
 import FullscreenGrid from './components/utils/Grid';
+import ClickableGrids from './components/algo/Dijkstra/temp';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <MainNavbar/>
         <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial'}}>
           {/* <Sidebar/> */}
+          {/* <ClickableGrids/> */}
             <MatrixToGrid/>
         </div>
       {/* <Router>

@@ -33,11 +33,14 @@ function MatrixToGrid() {
     return temp;
   });
 
-  function resetBoard(){
+  function resetBoard() {
     window.location.reload()
   }
 
   function FillCurrElement(index, color) {
+    if (index[0] == waypoints.start[0] && index[1] == waypoints.start[1]) {
+      return true
+    }
     const newCellColors = { ...cellColors };
     newCellColors[index[0]][index[1]] = color;
     setCellColors(newCellColors);
@@ -56,6 +59,7 @@ function MatrixToGrid() {
 
   useEffect(() => {
     if (foundFlag == true) {
+      FillCurrElement([waypoints.end[0], waypoints.end[1]], 'gold')
       alert('Foud Element')
     }
   }, [foundFlag])
@@ -85,7 +89,7 @@ function MatrixToGrid() {
         VisualizePath(sourcex - 1, sourcey, destinationx, destinationy)
         VisualizePath(sourcex, sourcey + 1, destinationx, destinationy)
         VisualizePath(sourcex, sourcey - 1, destinationx, destinationy)
-      }, 200);
+      }, 10);
     }
   }
 
@@ -120,6 +124,9 @@ function MatrixToGrid() {
       newFlag["curr"] = flag["curr"] === "start" ? "end" : "start";
       setFlag(newFlag);
       let tempWaypoints = waypoints;
+      if (tempWaypoints[flag['curr']] != null) {
+        newCellColors[tempWaypoints[flag["curr"]][0]][tempWaypoints[flag["curr"]][1]] = 'white'
+      }
       tempWaypoints[flag["curr"]] = index;
       setWaypoints(tempWaypoints);
     } else {
