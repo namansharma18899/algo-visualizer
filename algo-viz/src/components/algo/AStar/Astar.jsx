@@ -1,9 +1,8 @@
 import React from 'react';
-import createGraph from './Graph';
 import { useState, useEffect } from 'react';
-import NavScrollExample from '../../utils/navbar';
+import NavScrollExample from './navbar';
 import Container from 'react-bootstrap/Container';
-import './matrix.css';
+// import './matrix.css';
 import styled from 'styled-components';
 import { Col } from 'react-bootstrap';
 
@@ -11,7 +10,7 @@ import { Col } from 'react-bootstrap';
 const Rows = 10;
 const Cols = 80;
 
-function Dijkstra() {
+function Astar() {
 
   const [foundFlag, setFoundFlag] = useState(false);
   const [visited, setVisited] = useState(null);
@@ -64,7 +63,7 @@ function Dijkstra() {
     }
   }, [foundFlag])
 
-  async function VisualizePath(sourcex, sourcey, destinationx, destinationy) {
+  function VisualizePath(sourcex, sourcey, destinationx, destinationy) {
     if (CheckValidGridIndex(sourcex, sourcey) && visited[sourcex][sourcey] == "false") {
       if (foundFlag == true || (sourcex < 0 || sourcex > (Rows - 1) || sourcey < 0 || sourcey > (Cols - 1)) || ((blockers.find(el => el[0] == sourcex && el[1] == sourcey) != undefined ? true : false) == true)) {
         return false
@@ -78,33 +77,18 @@ function Dijkstra() {
       }
       var temp = [...visited]
       temp[sourcex][sourcey] = "true"
-      var res = [];
       setVisited(temp)
-      setTimeout(async () => {
+      setTimeout(() => {
         if (foundFlag == true) {
           return null;
         }
         //TODO: NEED TO PUT THESE FUNCTIONS AS PART OF CALLBACK IN setStateVar
         FillCurrElement([sourcex, sourcey], 'blue')
-        res.push(await VisualizePath(sourcex + 1, sourcey, destinationx, destinationy))
-        res.push(await VisualizePath(sourcex - 1, sourcey, destinationx, destinationy))
-        res.push(await VisualizePath(sourcex, sourcey + 1, destinationx, destinationy))
-        res.push(await VisualizePath(sourcex, sourcey - 1, destinationx, destinationy))
-        
-        console.log('RES DATA --> ', res)
-        res.filter((n) => {
-          return (n === true)
-        })
-        // alert('after call ')
-        if (res.length == 0) {
-          return false
-        } else {
-          return true
-        }
-
+        VisualizePath(sourcex + 1, sourcey, destinationx, destinationy)
+        VisualizePath(sourcex - 1, sourcey, destinationx, destinationy)
+        VisualizePath(sourcex, sourcey + 1, destinationx, destinationy)
+        VisualizePath(sourcex, sourcey - 1, destinationx, destinationy)
       }, 10);
-    } else {
-      return false
     }
   }
 
@@ -177,8 +161,7 @@ function Dijkstra() {
     console.log(visited)
     console.log(cellColors)
     console.log(blockers)
-    var res = VisualizePath(waypoints['start'][0], waypoints['start'][1], waypoints['end'][0], waypoints['end'][1]) == false
-    alert('res -> '+res)
+    VisualizePath(waypoints['start'][0], waypoints['start'][1], waypoints['end'][0], waypoints['end'][1])
   }
 
   function Game() {
@@ -189,7 +172,7 @@ function Dijkstra() {
     }
 
     return (
-      <div style={{ display: 'flex', width: '100%', height: '100vh', overflow: 'scroll initial', backgroundColor: 'grey' }}>
+      <div style={{ display: 'flex', width: '100%', height: '100vh',overflow: 'scroll initial', backgroundColor: 'grey' }}>
         <div style={gridStyle}>
           {matrix.map((row, rowIndex) =>
             row.map((cell, colIndex) => (
@@ -222,4 +205,4 @@ function Dijkstra() {
   );
 };
 
-export default Dijkstra;
+export default Astar;
