@@ -1,9 +1,14 @@
 # algo-visualizer
-
+![LOGO](https://github.com/namansharma18899/algo-visualizer/blob/main/algo-viz/src/assets/png/logo-color.png)
 ## Table on Contents
-
+- [Support](#suport)
 - [Setup](#setup)
-- [Important](#important)
+- [WHY](#whyy)
+- [Example](#example)
+
+## Suport
+
+- Please make sure to ⭐ the repository if you want to show support 💌. And if you want to go above and beyond you can contribute to this repo. I'll really appreticate it.
 
 ## Setup
 
@@ -16,10 +21,10 @@ $ npm install
 $ npm start
 ```
 ## WHYY
-- Cause Visualizing algorithms is one step closer to loosing your mind.
-https://media.giphy.com/media/Lopx9eUi34rbq/giphy.gif
+- Cause Visualizing algorithms sometimes is one step closer to loosing your mind.
+
+![Hell](https://github.com/namansharma18899/algo-visualizer/blob/main/algo-viz/src/assets/giphy.gif)
 
 ## Example
 ![Durstenfeld shuffle](https://github.com/namansharma18899/algo-visualizer/blob/main/algo-viz/src/assets/shuffle.png)
 ![Dijkstra](https://github.com/namansharma18899/algo-visualizer/blob/main/algo-viz/src/assets/grid.png)
-
