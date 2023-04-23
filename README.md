@@ -1,5 +1,6 @@
-# algo-visualizer
-![LOGO](https://github.com/namansharma18899/algo-visualizer/blob/main/algo-viz/src/assets/png/logo-color.png)
+# Algo Viz
+![LOGO](https://github.com/namansharma18899/algo-visualizer/blob/main/algo-viz/src/assets/logo-color.png)
+
 ## Table on Contents
 - [Support](#suport)
 - [Setup](#setup)
@@ -21,9 +22,11 @@ $ npm install
 $ npm start
 ```
 ## WHYY
-- Cause Visualizing algorithms sometimes is one step closer to loosing your mind.
+- Cause understanding algorithms on a piece of paper makes you go insane...
 
-![Hell](https://github.com/namansharma18899/algo-visualizer/blob/main/algo-viz/src/assets/giphy.gif)
+<p align="center">
+<img src="https://github.com/namansharma18899/algo-visualizer/blob/main/algo-viz/src/assets/giphy.gif">
+</p>
 
 ## Example
 ![Durstenfeld shuffle](https://github.com/namansharma18899/algo-visualizer/blob/main/algo-viz/src/assets/shuffle.png)
