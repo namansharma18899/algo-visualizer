@@ -1,5 +1,5 @@
 # Algo Viz
-![LOGO](https://github.com/namansharma18899/algo-visualizer/blob/main/algo-viz/assets/logo-color.png)
+![LOGO](https://github.com/namansharma18899/algo-visualizer/blob/main/assets/logo-color.png)
 
 ## Table on Contents
 - [Support](#suport)
@@ -25,9 +25,9 @@ $ npm start
 - Cause understanding algorithms on a piece of paper makes you go insane...
 
 <p align="center">
-<img src="https://github.com/namansharma18899/algo-visualizer/blob/main/algo-viz/assets/giphy.gif">
+<img src="https://github.com/namansharma18899/algo-visualizer/blob/main/assets/giphy.gif">
 </p>
 
 ## Example
-![Durstenfeld shuffle](https://github.com/namansharma18899/algo-visualizer/blob/main/algo-viz/assets/shuffle.png)
-![Dijkstra](https://github.com/namansharma18899/algo-visualizer/blob/main/algo-viz/assets/grid.png)
+![Durstenfeld shuffle](https://github.com/namansharma18899/algo-visualizer/blob/main/assets/shuffle.png)
+![Dijkstra](https://github.com/namansharma18899/algo-visualizer/blob/main/assets/grid.png)
