@@ -1,0 +1,35 @@
+.board{
+    width:100%;
+    height:calc(100vh - min(20vh , 100px));
+    background:black;
+    display:grid;
+    grid-template-rows: repeat(25 , 1fr);
+    grid-template-columns: repeat(50 , 1fr);
+    gap: 1px;
+    
+}
+
+.board .cell{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+}
+
+.wall {
+    background:black !important
+}
+
+.visited{
+    background:rgb(33, 85, 228) !important;
+    transition:all 8ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  
+}
+
+.path{
+    background:rgb(244, 255, 87) !important ;
+    transition:all 8ms cubic-bezier(0.075, 0.82, 0.165, 1);
+
+    
+}
+
